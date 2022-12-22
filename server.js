@@ -33,7 +33,7 @@ const options = {
   },
 };
 
-app.use('/audio', proxy(options));
+app.use('/audio', createProxyMiddleware(options));
 
 app.listen(process.env.PORT || 8088, () => {
   console.info('proxy server is running on port 8088')
