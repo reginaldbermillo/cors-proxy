@@ -6,7 +6,12 @@ const app = express()
 app.use(cors())
 app.use(createProxyMiddleware({
   router: (req) => new URL(req.path.substring(1)),
-  pathRewrite: (path, req) => (new URL(req.path.substring(1))).pathname,
+  pathRewrite: function(path, req) {
+    let newPath = new URL(req.path.substring(1)).pathname;
+    newPath = updateQueryStringParameter(newPath, 'mediaFormats',  'WAV');
+    // newPath = updateQueryStringParameter(newPath, 'client_secret',  clientSecret);
+    return newPath;
+  },
   changeOrigin: true,
   logger: console
 }))
@@ -26,11 +31,11 @@ const options = {
   logger: console,
   router: (req) => new URL(req.path.substring(1)),
   pathRewrite: function(path, req) {
-    let newPath = path;
+    let newPath = new URL(req.path.substring(1)).pathname;
     newPath = updateQueryStringParameter(newPath, 'mediaFormats',  'WAV');
     // newPath = updateQueryStringParameter(newPath, 'client_secret',  clientSecret);
     return newPath;
-  },
+  }
 };
 
 app.use('/audio', createProxyMiddleware(options));
