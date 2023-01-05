@@ -8,7 +8,7 @@ app.use(createProxyMiddleware({
   router: (req) => new URL(req.path.substring(1)),
   pathRewrite: function(path, req) {
     let newPath = new URL(req.path.substring(1)).pathname;
-    newPath = updateQueryStringParameter(newPath, 'mediaFormats',  'WAV');
+    newPath = updateQueryStringParameter(newPath, 'mediaFormats',  'WAV_ULAW');
     // newPath = updateQueryStringParameter(newPath, 'client_secret',  clientSecret);
     return newPath;
   },
