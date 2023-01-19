@@ -8,7 +8,7 @@ app.use(createProxyMiddleware({
   router: (req) => new URL(req.path.substring(1)),
   pathRewrite: function(path, req) {
     let newPath = new URL(req.path.substring(1)).pathname;
-    newPath = updateQueryStringParameter(newPath, 'mediaFormats',  'WAV_ULAW');
+    newPath = updateQueryStringParameter(newPath, 'mediaFormats',  'WAV');
     newPath = updateQueryStringParameter(newPath, 'expand',  'evaluationForm');
     // newPath = updateQueryStringParameter(newPath, 'client_secret',  clientSecret);
     return newPath;
@@ -27,19 +27,19 @@ const updateQueryStringParameter = (path, key, value) => {
   }
 };
 
-const options = {
-  changeOrigin: true,
-  logger: console,
-  router: (req) => new URL(req.path.substring(1)),
-  pathRewrite: function(path, req) {
-    let newPath = new URL(req.path.substring(1)).pathname;
-    newPath = updateQueryStringParameter(newPath, 'mediaFormats',  'WAV');
-    // newPath = updateQueryStringParameter(newPath, 'client_secret',  clientSecret);
-    return newPath;
-  }
-};
+// const options = {
+//   changeOrigin: true,
+//   logger: console,
+//   router: (req) => new URL(req.path.substring(1)),
+//   pathRewrite: function(path, req) {
+//     let newPath = new URL(req.path.substring(1)).pathname;
+//     newPath = updateQueryStringParameter(newPath, 'mediaFormats',  'WAV');
+//     // newPath = updateQueryStringParameter(newPath, 'client_secret',  clientSecret);
+//     return newPath;
+//   }
+// };
 
-app.use('/audio', createProxyMiddleware(options));
+// app.use('/audio', createProxyMiddleware(options));
 
 app.listen(process.env.PORT || 8088, () => {
   console.info('proxy server is running on port 8088')
