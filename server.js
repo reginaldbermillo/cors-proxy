@@ -10,6 +10,8 @@ app.use(createProxyMiddleware({
     let newPath = new URL(req.path.substring(1)).pathname;
     newPath = updateQueryStringParameter(newPath, 'mediaFormats',  'WAV');
     newPath = updateQueryStringParameter(newPath, 'expand',  'evaluationForm');
+    newPath = updateQueryStringParameter(newPath, 'expand',  'agent');
+    newPath = updateQueryStringParameter(newPath, 'expand',  'evaluator');
     // newPath = updateQueryStringParameter(newPath, 'client_secret',  clientSecret);
     return newPath;
   },
