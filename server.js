@@ -6,34 +6,28 @@ const app = express()
 app.use(cors())
 app.use(createProxyMiddleware({
   router: (req) => new URL(req.path.substring(1)),
-  pathRewrite: (path, req) => (new URL(req.path.substring(1))).pathname,
+  pathRewrite: function(path, req) {
+    let newPath = new URL(req.path.substring(1)).pathname;
+    newPath = updateQueryStringParameter(newPath, 'mediaFormats',  'WAV');
+    newPath = updateQueryStringParameter(newPath, 'expand',  'evaluationForm');
+    // newPath = updateQueryStringParameter(newPath, 'expand',  'agent');
+    // newPath = updateQueryStringParameter(newPath, 'expand',  'evaluator');
+    // newPath = updateQueryStringParameter(newPath, 'client_secret',  clientSecret);
+    return newPath;
+  },
   changeOrigin: true,
   logger: console
 }))
-// app.use(createProxyMiddleware({
-//   router: (req) => new URL(req.path.substring(1)),
-//   pathRewrite: function(path, req) {
-//     let newPath = new URL(req.path.substring(1)).pathname;
-//     newPath = updateQueryStringParameter(newPath, 'mediaFormats',  'WAV');
-//     newPath = updateQueryStringParameter(newPath, 'expand',  'evaluationForm');
-//     newPath = updateQueryStringParameter(newPath, 'expand',  'agent');
-//     newPath = updateQueryStringParameter(newPath, 'expand',  'evaluator');
-//     // newPath = updateQueryStringParameter(newPath, 'client_secret',  clientSecret);
-//     return newPath;
-//   },
-//   changeOrigin: true,
-//   logger: console
-// }))
 
-// const updateQueryStringParameter = (path, key, value) => {
-//   const re = new RegExp('([?&])' + key + '=.*?(&|$)', 'i');
-//   const separator = path.indexOf('?') !== -1 ? '&' : '?';
-//   if (path.match(re)) {
-//     return path.replace(re, '$1' + key + '=' + value + '$2');
-//   } else {
-//     return path + separator + key + '=' + value;
-//   }
-// };
+const updateQueryStringParameter = (path, key, value) => {
+  const re = new RegExp('([?&])' + key + '=.*?(&|$)', 'i');
+  const separator = path.indexOf('?') !== -1 ? '&' : '?';
+  if (path.match(re)) {
+    return path.replace(re, '$1' + key + '=' + value + '$2');
+  } else {
+    return path + separator + key + '=' + value;
+  }
+};
 
 
 
