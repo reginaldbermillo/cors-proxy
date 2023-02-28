@@ -10,8 +10,16 @@ app.use(createProxyMiddleware({
     let newPath = new URL(req.path.substring(1)).pathname;
     let mediaFormats = req.query.mediaFormats
     let expandVal = req.query.expand
+    let maxWaitMs = req.query.maxWaitMs
+    let formatId = req.query.formatId
+    let download = req.query.download
+    let fileName = req.query.fileName
     newPath = updateQueryStringParameter(newPath, 'mediaFormats',  mediaFormats);
     newPath = updateQueryStringParameter(newPath, 'expand',  expandVal);
+    newPath = updateQueryStringParameter(newPath, 'maxWaitMs',  maxWaitMs);
+    newPath = updateQueryStringParameter(newPath, 'formatId',  formatId);
+    newPath = updateQueryStringParameter(newPath, 'download',  download);
+    newPath = updateQueryStringParameter(newPath, 'maxWaitMs',  fileName);
     // newPath = updateQueryStringParameter(newPath, 'expand',  'agent');
     // newPath = updateQueryStringParameter(newPath, 'expand',  'evaluator');
     // newPath = updateQueryStringParameter(newPath, 'client_secret',  clientSecret);
