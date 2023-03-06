@@ -15,6 +15,9 @@ app.use(createProxyMiddleware({
     let download = req.query.download
     let fileName = req.query.fileName
     let divisionId = req.query.divisionId
+    let pageNumber = req.query.pageNumber
+    let pageSize = req.query.pageSize
+    let sortOrder = req.query.sortOrder
     newPath = updateQueryStringParameter(newPath, 'mediaFormats', mediaFormats);
     newPath = updateQueryStringParameter(newPath, 'expand', expandVal);
     newPath = updateQueryStringParameter(newPath, 'maxWaitMs', 5000);
@@ -22,6 +25,9 @@ app.use(createProxyMiddleware({
     newPath = updateQueryStringParameter(newPath, 'download', true);
     newPath = updateQueryStringParameter(newPath, 'fileName', fileName);
     newPath = updateQueryStringParameter(newPath, 'divisionId', divisionId);
+    newPath = updateQueryStringParameter(newPath, 'pageNumber', pageNumber);
+    newPath = updateQueryStringParameter(newPath, 'pageSize', pageSize);
+    newPath = updateQueryStringParameter(newPath, 'sortOrder', sortOrder);
     // newPath = updateQueryStringParameter(newPath, 'expand',  'agent');
     // newPath = updateQueryStringParameter(newPath, 'expand',  'evaluator');
     // newPath = updateQueryStringParameter(newPath, 'client_secret',  clientSecret);
