@@ -18,6 +18,8 @@ app.use(createProxyMiddleware({
     let pageNumber = req.query.pageNumber
     let pageSize = req.query.pageSize
     let sortOrder = req.query.sortOrder
+    let name = req.query.name
+    let onlyLatestPerContext = req.query.onlyLatestPerContext
     newPath = updateQueryStringParameter(newPath, 'mediaFormats', mediaFormats);
     newPath = updateQueryStringParameter(newPath, 'expand', expandVal);
     newPath = updateQueryStringParameter(newPath, 'maxWaitMs', 5000);
@@ -28,6 +30,8 @@ app.use(createProxyMiddleware({
     newPath = updateQueryStringParameter(newPath, 'pageNumber', pageNumber);
     newPath = updateQueryStringParameter(newPath, 'pageSize', pageSize);
     newPath = updateQueryStringParameter(newPath, 'sortOrder', sortOrder);
+    newPath = updateQueryStringParameter(newPath, 'name', name);
+    newPath = updateQueryStringParameter(newPath, 'onlyLatestPerContext', true);
     // newPath = updateQueryStringParameter(newPath, 'expand',  'agent');
     // newPath = updateQueryStringParameter(newPath, 'expand',  'evaluator');
     // newPath = updateQueryStringParameter(newPath, 'client_secret',  clientSecret);
